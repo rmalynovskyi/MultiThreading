@@ -16,7 +16,7 @@ public class Main {
 
         // Multithreading sort
         MultiThreadShellSort multiThreadShellSort = new MultiThreadShellSort();
-        multiThreadShellSort.sort(array, 10);
+        multiThreadShellSort.sort(array,10);
 
         // Print out sorted array
         System.out.println("Sorted array :" + Arrays.toString(array));

@@ -9,7 +9,6 @@ public class FactorialRunner {
     public static void main(String[] args) {
 
         Thread[] array = new Thread[100];
-
         for (int i = 0; i < array.length; i++) {
             array[i] = new Thread(new Factorial(i + 1));
             array[i].start();
