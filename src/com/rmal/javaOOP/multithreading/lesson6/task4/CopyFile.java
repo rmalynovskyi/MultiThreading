@@ -6,8 +6,9 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.concurrent.Callable;
 
-class CopyFile implements Runnable {
+class CopyFile implements Callable<Integer> {
     private File source;
     private String pathOfCopy;
 
@@ -25,18 +26,21 @@ class CopyFile implements Runnable {
     }
 
     @Override
-    public void run() {
+    public Integer call() throws Exception {
+        int count = 0;
         Thread th = Thread.currentThread();
         System.out.println(th.getName() + " copying file: " + source.getName());
         try (FileInputStream input = new FileInputStream(source);
-             FileOutputStream output = new FileOutputStream(pathOfCopy + "/")) {
+             FileOutputStream output = new FileOutputStream(pathOfCopy)) {
             byte[] buffer = new byte[1024];
             int byteread;
             for (; (byteread = input.read(buffer)) > 0; ) {
                 output.write(buffer, 0, byteread);
             }
+            count++;
         } catch (IOException e) {
             System.out.println(e);
         }
+        return count;
     }
 }
